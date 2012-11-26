@@ -14,13 +14,10 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 
 @implementation TPTRotaryChooser
 
-@synthesize interactionStyle;
 @synthesize value;
 @synthesize continuous;
 @synthesize defaultValue;
 @synthesize resetsToDefault;
-@synthesize scalingFactor;
-
 
 - (float)angleForValue:(float)theValue
 {
@@ -53,12 +50,10 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 - (float)valueForPosition:(CGPoint)point
 {
 	float delta;
-	if (self.interactionStyle == MHRotaryKnobInteractionStyleSliderVertical)
-		delta = touchOrigin.y - point.y;
-	else
-		delta = point.x - touchOrigin.x;
 	
-	float newAngle = delta * self.scalingFactor + angle;
+	delta = point.x - touchOrigin.x;
+
+	float newAngle = delta + angle;
 
 	return [self valueForAngle:newAngle];
 }
@@ -127,12 +122,10 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 
 - (void)commonInit
 {
-	interactionStyle = MHRotaryKnobInteractionStyleRotating;
 	value = defaultValue = 0.5f;
 	angle = 0.0f;
 	continuous = YES;
 	resetsToDefault = YES;
-	scalingFactor = 1.0f;
 	
 	knobImageView = [[UIImageView alloc] initWithFrame:self.bounds];
 	[self addSubview:knobImageView];
@@ -284,21 +277,15 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 {
 	CGPoint point = [touch locationInView:self];
 	
-	if (self.interactionStyle == MHRotaryKnobInteractionStyleRotating)
-	{
-		// If the touch is too close to the center, we can't calculate a decent
-		// angle and the knob becomes too jumpy.
-		if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
-			return NO;
-		
-		// Calculate starting angle between touch and center of control.
-		angle = [self angleBetweenCenterAndPoint:point];
-	}
-	else
-	{
-		touchOrigin = point;
-		angle = [self angleForValue:value];
-	}
+
+	// If the touch is too close to the center, we can't calculate a decent
+	// angle and the knob becomes too jumpy.
+	if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
+		return NO;
+	
+	// Calculate starting angle between touch and center of control.
+	angle = [self angleBetweenCenterAndPoint:point];
+
 	
 	self.highlighted = YES;
 	[self showHighlighedKnobImage];
@@ -317,27 +304,16 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	
 	CGPoint point = [touch locationInView:self];
 	
-	if (self.interactionStyle == MHRotaryKnobInteractionStyleRotating)
-	{
-		if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
-			return NO;
-		
-		// Calculate how much the angle has changed since the last event.
-		float newAngle = [self angleBetweenCenterAndPoint:point];
-		float delta = newAngle - angle;
-		angle = newAngle;
-		
-		// We don't want the knob to jump from minimum to maximum or vice versa
-		// so disallow huge changes.
-		if (fabsf(delta) > 45.0f)
-			return NO;
-		
-		self.value +=  delta / (MAX_ANGLE*2.0f);
-	}
-	else
-	{
-		self.value = [self valueForPosition:point];
-	}
+	if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
+		return NO;
+	
+	// Calculate how much the angle has changed since the last event.
+	float newAngle = [self angleBetweenCenterAndPoint:point];
+	float delta = newAngle - angle;
+	angle = newAngle;
+	
+	self.value +=  delta / (MAX_ANGLE*2.0f);
+
 	
 	return YES;
 }

@@ -8,17 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-/*!
- * Possible values for the rotary knob's interactionStyle property.
- */
-typedef enum
-{
-	MHRotaryKnobInteractionStyleRotating,
-	MHRotaryKnobInteractionStyleSliderHorizontal,  // left -, right +
-	MHRotaryKnobInteractionStyleSliderVertical     // up +, down -
-}
-MHRotaryKnobInteractionStyle;
-
 @interface TPTRotaryChooser : UIControl {
 	UIImageView* backgroundImageView;  ///< shows the background image
 	UIImageView* foregroundImageView;  ///< shows the foreground image
@@ -31,8 +20,6 @@ MHRotaryKnobInteractionStyle;
 	BOOL canReset;                     ///< prevents reset while still dragging
 }
 
-/*! How the user interacts with the control. */
-@property (nonatomic, assign) MHRotaryKnobInteractionStyle interactionStyle;
 
 /*! The image that is drawn behind the knob. May be nil. */
 @property (nonatomic, retain) UIImage* backgroundImage;
@@ -64,12 +51,6 @@ MHRotaryKnobInteractionStyle;
  * knob. The default is YES.
  */
 @property (nonatomic, assign) BOOL continuous;
-
-/*!
- * How many points of movement result in a one degree rotation in the knob's
- * position. Only used in the horizontal/vertical slider modes. Default is 1.
- */
-@property (nonatomic, assign) float scalingFactor;
 
 /*!
  * Sets the controls’s current value, allowing you to animate the change

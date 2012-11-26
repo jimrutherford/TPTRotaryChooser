@@ -22,8 +22,6 @@
     [super viewDidLoad];
 	
 	rotaryChooser = [[TPTRotaryChooser alloc] initWithFrame:CGRectMake(200, 200, 400, 400)];
-	rotaryChooser.interactionStyle = MHRotaryKnobInteractionStyleRotating;
-	rotaryChooser.scalingFactor = 1.5f;
 	rotaryChooser.value = 20;
 	rotaryChooser.defaultValue = rotaryChooser.value;
 	rotaryChooser.resetsToDefault = YES;
@@ -32,7 +30,6 @@
 	[rotaryChooser setKnobImage:[UIImage imageNamed:@"dial"] forState:UIControlStateNormal];
 	[rotaryChooser setKnobImage:[UIImage imageNamed:@"dial"] forState:UIControlStateHighlighted];
 	[rotaryChooser setKnobImage:[UIImage imageNamed:@"dial"] forState:UIControlStateDisabled];
-	//rotaryChooser.knobImageCenter = CGPointMake(80.0f, 76.0f);
 	[rotaryChooser addTarget:self action:@selector(rotaryKnobDidChange) forControlEvents:UIControlEventValueChanged];
 	
 	[self.view addSubview:rotaryChooser];
