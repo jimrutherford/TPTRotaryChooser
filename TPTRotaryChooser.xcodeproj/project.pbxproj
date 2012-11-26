@@ -1,0 +1,354 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37D357021663D413008B01D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357011663D413008B01D6 /* UIKit.framework */; };
+		37D357041663D413008B01D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357031663D413008B01D6 /* Foundation.framework */; };
+		37D357061663D413008B01D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357051663D413008B01D6 /* CoreGraphics.framework */; };
+		37D3570C1663D413008B01D6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 37D3570A1663D413008B01D6 /* InfoPlist.strings */; };
+		37D3570E1663D413008B01D6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3570D1663D413008B01D6 /* main.m */; };
+		37D357121663D413008B01D6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D357111663D413008B01D6 /* AppDelegate.m */; };
+		37D357141663D413008B01D6 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357131663D413008B01D6 /* Default.png */; };
+		37D357161663D413008B01D6 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357151663D413008B01D6 /* Default@2x.png */; };
+		37D357181663D413008B01D6 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357171663D413008B01D6 /* Default-568h@2x.png */; };
+		37D3571B1663D413008B01D6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3571A1663D413008B01D6 /* ViewController.m */; };
+		37D3571E1663D413008B01D6 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3571C1663D413008B01D6 /* ViewController.xib */; };
+		37D357291663D45C008B01D6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357281663D45C008B01D6 /* QuartzCore.framework */; };
+		37D3572C1663D958008B01D6 /* TPTRotaryChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3572B1663D958008B01D6 /* TPTRotaryChooser.m */; };
+		37D357371663FC38008B01D6 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357351663FC38008B01D6 /* background.png */; };
+		37D357381663FC38008B01D6 /* dial.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357361663FC38008B01D6 /* dial.png */; };
+		37D3573A16640D55008B01D6 /* appBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D3573916640D55008B01D6 /* appBG.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		37D356FD1663D413008B01D6 /* TPTRotaryChooser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TPTRotaryChooser.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37D357011663D413008B01D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		37D357031663D413008B01D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		37D357051663D413008B01D6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		37D357091663D413008B01D6 /* TPTRotaryChooser-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TPTRotaryChooser-Info.plist"; sourceTree = "<group>"; };
+		37D3570B1663D413008B01D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		37D3570D1663D413008B01D6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		37D3570F1663D413008B01D6 /* TPTRotaryChooser-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TPTRotaryChooser-Prefix.pch"; sourceTree = "<group>"; };
+		37D357101663D413008B01D6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		37D357111663D413008B01D6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		37D357131663D413008B01D6 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		37D357151663D413008B01D6 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		37D357171663D413008B01D6 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		37D357191663D413008B01D6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		37D3571A1663D413008B01D6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		37D3571D1663D413008B01D6 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		37D357281663D45C008B01D6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		37D3572A1663D958008B01D6 /* TPTRotaryChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTRotaryChooser.h; sourceTree = "<group>"; };
+		37D3572B1663D958008B01D6 /* TPTRotaryChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTRotaryChooser.m; sourceTree = "<group>"; };
+		37D357351663FC38008B01D6 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Images/background.png; sourceTree = "<group>"; };
+		37D357361663FC38008B01D6 /* dial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dial.png; path = Images/dial.png; sourceTree = "<group>"; };
+		37D3573916640D55008B01D6 /* appBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appBG.png; path = Images/appBG.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		37D356FA1663D413008B01D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D357291663D45C008B01D6 /* QuartzCore.framework in Frameworks */,
+				37D357021663D413008B01D6 /* UIKit.framework in Frameworks */,
+				37D357041663D413008B01D6 /* Foundation.framework in Frameworks */,
+				37D357061663D413008B01D6 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		37D356F21663D413008B01D6 = {
+			isa = PBXGroup;
+			children = (
+				37D357071663D413008B01D6 /* TPTRotaryChooser */,
+				37D357001663D413008B01D6 /* Frameworks */,
+				37D356FE1663D413008B01D6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		37D356FE1663D413008B01D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				37D356FD1663D413008B01D6 /* TPTRotaryChooser.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		37D357001663D413008B01D6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				37D357281663D45C008B01D6 /* QuartzCore.framework */,
+				37D357011663D413008B01D6 /* UIKit.framework */,
+				37D357031663D413008B01D6 /* Foundation.framework */,
+				37D357051663D413008B01D6 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37D357071663D413008B01D6 /* TPTRotaryChooser */ = {
+			isa = PBXGroup;
+			children = (
+				37D357251663D430008B01D6 /* Resources */,
+				37D357241663D422008B01D6 /* Control */,
+				37D357101663D413008B01D6 /* AppDelegate.h */,
+				37D357111663D413008B01D6 /* AppDelegate.m */,
+				37D357191663D413008B01D6 /* ViewController.h */,
+				37D3571A1663D413008B01D6 /* ViewController.m */,
+				37D357081663D413008B01D6 /* Supporting Files */,
+			);
+			path = TPTRotaryChooser;
+			sourceTree = "<group>";
+		};
+		37D357081663D413008B01D6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				37D357091663D413008B01D6 /* TPTRotaryChooser-Info.plist */,
+				37D3570A1663D413008B01D6 /* InfoPlist.strings */,
+				37D3570D1663D413008B01D6 /* main.m */,
+				37D3570F1663D413008B01D6 /* TPTRotaryChooser-Prefix.pch */,
+				37D357131663D413008B01D6 /* Default.png */,
+				37D357151663D413008B01D6 /* Default@2x.png */,
+				37D357171663D413008B01D6 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		37D357241663D422008B01D6 /* Control */ = {
+			isa = PBXGroup;
+			children = (
+				37D3572A1663D958008B01D6 /* TPTRotaryChooser.h */,
+				37D3572B1663D958008B01D6 /* TPTRotaryChooser.m */,
+			);
+			name = Control;
+			sourceTree = "<group>";
+		};
+		37D357251663D430008B01D6 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				37D357271663D43C008B01D6 /* Xibs */,
+				37D357261663D435008B01D6 /* Images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		37D357261663D435008B01D6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				37D3573916640D55008B01D6 /* appBG.png */,
+				37D357351663FC38008B01D6 /* background.png */,
+				37D357361663FC38008B01D6 /* dial.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		37D357271663D43C008B01D6 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				37D3571C1663D413008B01D6 /* ViewController.xib */,
+			);
+			name = Xibs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		37D356FC1663D413008B01D6 /* TPTRotaryChooser */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 37D357211663D413008B01D6 /* Build configuration list for PBXNativeTarget "TPTRotaryChooser" */;
+			buildPhases = (
+				37D356F91663D413008B01D6 /* Sources */,
+				37D356FA1663D413008B01D6 /* Frameworks */,
+				37D356FB1663D413008B01D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TPTRotaryChooser;
+			productName = TPTRotaryChooser;
+			productReference = 37D356FD1663D413008B01D6 /* TPTRotaryChooser.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		37D356F41663D413008B01D6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Braxio Interactive";
+			};
+			buildConfigurationList = 37D356F71663D413008B01D6 /* Build configuration list for PBXProject "TPTRotaryChooser" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 37D356F21663D413008B01D6;
+			productRefGroup = 37D356FE1663D413008B01D6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				37D356FC1663D413008B01D6 /* TPTRotaryChooser */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		37D356FB1663D413008B01D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3570C1663D413008B01D6 /* InfoPlist.strings in Resources */,
+				37D357141663D413008B01D6 /* Default.png in Resources */,
+				37D357161663D413008B01D6 /* Default@2x.png in Resources */,
+				37D357181663D413008B01D6 /* Default-568h@2x.png in Resources */,
+				37D3571E1663D413008B01D6 /* ViewController.xib in Resources */,
+				37D357371663FC38008B01D6 /* background.png in Resources */,
+				37D357381663FC38008B01D6 /* dial.png in Resources */,
+				37D3573A16640D55008B01D6 /* appBG.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		37D356F91663D413008B01D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37D3570E1663D413008B01D6 /* main.m in Sources */,
+				37D357121663D413008B01D6 /* AppDelegate.m in Sources */,
+				37D3571B1663D413008B01D6 /* ViewController.m in Sources */,
+				37D3572C1663D958008B01D6 /* TPTRotaryChooser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		37D3570A1663D413008B01D6 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37D3570B1663D413008B01D6 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		37D3571C1663D413008B01D6 /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				37D3571D1663D413008B01D6 /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		37D3571F1663D413008B01D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		37D357201663D413008B01D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		37D357221663D413008B01D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TPTRotaryChooser/TPTRotaryChooser-Prefix.pch";
+				INFOPLIST_FILE = "TPTRotaryChooser/TPTRotaryChooser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		37D357231663D413008B01D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TPTRotaryChooser/TPTRotaryChooser-Prefix.pch";
+				INFOPLIST_FILE = "TPTRotaryChooser/TPTRotaryChooser-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		37D356F71663D413008B01D6 /* Build configuration list for PBXProject "TPTRotaryChooser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D3571F1663D413008B01D6 /* Debug */,
+				37D357201663D413008B01D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		37D357211663D413008B01D6 /* Build configuration list for PBXNativeTarget "TPTRotaryChooser" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				37D357221663D413008B01D6 /* Debug */,
+				37D357231663D413008B01D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 37D356F41663D413008B01D6 /* Project object */;
+}
