@@ -12,5 +12,6 @@
 @interface ViewController : UIViewController
 
 @property TPTRotaryChooser *rotaryChooser;
+@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
 
 @end

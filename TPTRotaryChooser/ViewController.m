@@ -16,20 +16,16 @@
 @implementation ViewController
 
 @synthesize rotaryChooser;
+@synthesize valueLabel;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
 	rotaryChooser = [[TPTRotaryChooser alloc] initWithFrame:CGRectMake(200, 200, 400, 400)];
-	rotaryChooser.value = 20;
-	rotaryChooser.defaultValue = rotaryChooser.value;
-	rotaryChooser.resetsToDefault = YES;
 	rotaryChooser.backgroundColor = [UIColor clearColor];
 	rotaryChooser.backgroundImage = [UIImage imageNamed:@"background"];
-	[rotaryChooser setKnobImage:[UIImage imageNamed:@"dial"] forState:UIControlStateNormal];
-	[rotaryChooser setKnobImage:[UIImage imageNamed:@"dial"] forState:UIControlStateHighlighted];
-	[rotaryChooser setKnobImage:[UIImage imageNamed:@"dial"] forState:UIControlStateDisabled];
+	rotaryChooser.knobImage = [UIImage imageNamed:@"dial"];
 	[rotaryChooser addTarget:self action:@selector(rotaryKnobDidChange) forControlEvents:UIControlEventValueChanged];
 	
 	[self.view addSubview:rotaryChooser];
@@ -38,7 +34,7 @@
 
 - (IBAction)rotaryKnobDidChange
 {
-	//label.text = [NSString stringWithFormat:@"%.3f", rotaryKnob.value];
+	//valueLabel.text = [NSString stringWithFormat:@"%.3f", rotaryChooser.value];
 	//slider.value = rotaryKnob.value;
 }
 
