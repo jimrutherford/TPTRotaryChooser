@@ -14,7 +14,8 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 @implementation TPTRotaryChooser
 
 @synthesize continuous;
-
+@synthesize numberOfSegments;
+@synthesize selectedSegment;
 
 - (float)angleBetweenCenterAndPoint:(CGPoint)point
 {
@@ -79,8 +80,14 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	
 	knobImageView = [[UIImageView alloc] initWithFrame:self.bounds];
 	[self addSubview:knobImageView];
-	
-	//[self angleDidChangeFrom:angle to:angle animated:NO];
+}
+
+-(id) init
+{
+	if (self = [super init])  {
+		self.selectedSegment = -1;
+	}
+	return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -92,19 +99,38 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder*)aDecoder
+#pragma mark -
+#pragma mark Selected Item Handling
+
+- (void) setSelectedSegment:(int)newSelectedSegment
 {
-	if ((self = [super initWithCoder:aDecoder]))
+	CGFloat newAngle = [self angleForSegment:newSelectedSegment];
+	
+	if(selectedSegment == -1)
 	{
-		[self commonInit];
+		[self angleDidChangeFrom:(float)0.0f to:(float)newAngle animated:NO];
 	}
-	return self;
+	else
+	{
+		[self angleDidChangeFrom:(float)angle to:(float)newAngle animated:YES];
+	}
+
+	selectedSegment = newSelectedSegment;
 }
 
-- (void)dealloc
+
+
+-(CGFloat) angleForSegment:(int)segment
 {
-
+	float segments = [[NSNumber numberWithInt: numberOfSegments] floatValue];
+	float anglePerSegment = 360.0f/segments;
+	
+	// adding one as our selected segment is zero based
+	return (segment * anglePerSegment) + (anglePerSegment/2);
+	
 }
+
+
 
 #pragma mark -
 #pragma mark Touch Handling

@@ -24,6 +24,8 @@
 	
 	rotaryChooser = [[TPTRotaryChooser alloc] initWithFrame:CGRectMake(200, 200, 400, 400)];
 	rotaryChooser.backgroundColor = [UIColor clearColor];
+	rotaryChooser.numberOfSegments = 6;
+	rotaryChooser.selectedSegment = 1;
 	rotaryChooser.backgroundImage = [UIImage imageNamed:@"background"];
 	rotaryChooser.knobImage = [UIImage imageNamed:@"dial"];
 	[rotaryChooser addTarget:self action:@selector(rotaryKnobDidChange) forControlEvents:UIControlEventValueChanged];

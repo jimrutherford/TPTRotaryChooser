@@ -16,6 +16,12 @@
 	CGPoint touchOrigin;               ///< for horizontal/vertical tracking
 }
 
+/*! The number of segments in the outer band */
+@property (nonatomic) int numberOfSegments;
+
+/*! The selected segment */
+@property (nonatomic) int selectedSegment;
+
 
 /*! The image that is drawn behind the knob. May be nil. */
 @property (nonatomic, retain) UIImage* backgroundImage;
