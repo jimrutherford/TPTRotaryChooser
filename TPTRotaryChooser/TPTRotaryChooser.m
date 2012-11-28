@@ -16,6 +16,7 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 @synthesize continuous;
 @synthesize numberOfSegments;
 @synthesize selectedSegment;
+@synthesize currentSegment;
 
 - (float)angleBetweenCenterAndPoint:(CGPoint)point
 {
@@ -39,6 +40,11 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 - (void)angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:(BOOL)animated
 {
 	// (If you want to do custom drawing, then this is the place to do so.)
+		
+	if (newAngle > 180)
+	{
+		newAngle = (360-newAngle) * -1;
+	}
 	
 	if (animated)
 	{
@@ -104,15 +110,31 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 
 - (void) setSelectedSegment:(int)newSelectedSegment
 {
+	int oldSelectedSegment = selectedSegment;
+	
+	
+	NSLog(@"Old %i, New %i", oldSelectedSegment, newSelectedSegment);
+	
+	
 	CGFloat newAngle = [self angleForSegment:newSelectedSegment];
 	
 	if(selectedSegment == -1)
 	{
+		// control is being drawn for the first time, no need to animate
 		[self angleDidChangeFrom:(float)0.0f to:(float)newAngle animated:NO];
 	}
 	else
 	{
-		[self angleDidChangeFrom:(float)angle to:(float)newAngle animated:YES];
+		
+		if (!dragging)
+		{
+			CGFloat oldAngle = [self angleForSegment:oldSelectedSegment];
+			[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:YES];
+		}
+		else
+		{
+			[self angleDidChangeFrom:(float)angle to:(float)newAngle animated:YES];
+		}
 	}
 
 	selectedSegment = newSelectedSegment;
@@ -130,51 +152,81 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	
 }
 
+- (int) currentSegmentForAngle:(float)theAngle
+{
+	int segment = 0;
+
+	// get the angle as a range between 0 and 360
+	float actualAngle = theAngle;
+	
+	if (angle < 0)
+	{
+		actualAngle = 360.0f + theAngle;
+	}
+	
+	// translate the angle into slice
+	float totalSegments = [[NSNumber numberWithInt: numberOfSegments] floatValue];
+	float anglePerSegment = 360.0f/totalSegments;
+	
+	for (float a = 0; a < totalSegments; a++) {
+		float currentAngle = a * anglePerSegment;
+		float nextAngle = (a + 1) *anglePerSegment;
+		
+		if (actualAngle > currentAngle && actualAngle < nextAngle)
+		{
+			segment = [[NSNumber numberWithFloat:a] intValue];
+			break;
+		}
+	}
+	return segment;
+}
 
 
 #pragma mark -
 #pragma mark Touch Handling
 
+CGPoint lastTouchLocation;
+BOOL dragging;
+
 - (BOOL)beginTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
-	CGPoint point = [touch locationInView:self];
-	
-
-	// If the touch is too close to the center, we can't calculate a decent
-	// angle and the knob becomes too jumpy.
-	if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
-		return NO;
-	
-	// Calculate starting angle between touch and center of control.
-	angle = [self angleBetweenCenterAndPoint:point];
+	lastTouchLocation = [touch locationInView:self];
+	dragging = NO;
 	
 	return YES;
 }
 
 - (BOOL)handleTouch:(UITouch*)touch
 {
-	
 	CGPoint point = [touch locationInView:self];
 	
 	if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
 		return NO;
-	
 	// Calculate how much the angle has changed since the last event.
 	float oldAngle = angle;
 	float newAngle = [self angleBetweenCenterAndPoint:point];
 	
-	[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:YES];
+	if (dragging)
+	{
 
+	
+	
+		[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:NO];
+		
+	}
 	angle = newAngle;
-	NSLog(@"Angle is %f", angle);
+	
 	return YES;
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
+	dragging = YES;
 	if ([self handleTouch:touch] && continuous)
+	{
 		[self sendActionsForControlEvents:UIControlEventValueChanged];
-	
+		self.currentSegment = [self currentSegmentForAngle:angle];
+	}
 	return YES;
 }
 
@@ -182,12 +234,19 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 {
 	[self handleTouch:touch];
 	[self sendActionsForControlEvents:UIControlEventValueChanged];
+	
+	self.currentSegment = [self currentSegmentForAngle:angle];
+	self.selectedSegment = self.currentSegment;
+	
+	dragging = NO;
 }
 
 - (void)cancelTrackingWithEvent:(UIEvent*)event
 {
 	// May need to do something here at a later time
 }
+
+
 
 
 #pragma mark -

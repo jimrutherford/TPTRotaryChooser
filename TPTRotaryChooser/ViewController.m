@@ -36,8 +36,7 @@
 
 - (IBAction)rotaryKnobDidChange
 {
-	//valueLabel.text = [NSString stringWithFormat:@"%.3f", rotaryChooser.value];
-	//slider.value = rotaryKnob.value;
+	valueLabel.text = [NSString stringWithFormat:@"Angle - %i", rotaryChooser.currentSegment];
 }
 
 - (void)didReceiveMemoryWarning

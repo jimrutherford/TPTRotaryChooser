@@ -22,6 +22,9 @@
 /*! The selected segment */
 @property (nonatomic) int selectedSegment;
 
+/*! The current segment - this property updates while the control is dragging */
+@property (nonatomic) int currentSegment;
+
 
 /*! The image that is drawn behind the knob. May be nil. */
 @property (nonatomic, retain) UIImage* backgroundImage;
