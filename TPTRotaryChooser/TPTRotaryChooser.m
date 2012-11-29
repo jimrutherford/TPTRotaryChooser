@@ -18,6 +18,11 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 @synthesize selectedSegment;
 @synthesize currentSegment;
 
+
+CGPoint lastTouchLocation;
+BOOL dragging;
+int oldSegment;
+
 - (float)angleBetweenCenterAndPoint:(CGPoint)point
 {
 	CGPoint center = CGPointMake(self.bounds.size.width/2.0f, self.bounds.size.height/2.0f);
@@ -50,13 +55,30 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	}
 	if (animated)
 	{
-		// We cannot simply use UIView's animations because they will take the
-		// shortest path, but we always want to go the long way around. So we
-		// set up a keyframe animation with three keyframes: the old angle, the
-		// midpoint between the old and new angles, and the new angle.
-		
+		// We are going to animate between three keyframes in order to
+		// make sure we are animating between the shortest points
+		// start by getting a point in the middle of our start and end
 		float midpoint = (newAngle + oldAngle)/2.0f;
 
+		
+		// if we are animating between taps let's get the shortest
+		// distance to animate between
+		if (!dragging) {
+			float diff = fabsf(newAngle - oldAngle);
+			if (diff > 180)
+			{
+				midpoint = midpoint - 180;
+				if (newAngle>oldAngle)
+				{
+					newAngle = (360-newAngle) * -1;
+				}
+				else
+				{
+					oldAngle = (360-oldAngle) * -1;
+				}
+				}
+		}
+			
 		CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
 		animation.duration = 0.2f;
 		
@@ -95,6 +117,8 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 -(id) init
 {
 	if (self = [super init])  {
+		// init some properties to sentinal values
+		oldSegment = -1;
 		self.selectedSegment = -1;
 	}
 	return self;
@@ -115,8 +139,6 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 - (void) setSelectedSegment:(int)newSelectedSegment
 {
 	int oldSelectedSegment = selectedSegment;
-
-	//NSLog(@"Old %i, New %i", oldSelectedSegment, newSelectedSegment);
 
 	CGFloat newAngle = [self angleForSegment:newSelectedSegment];
 	
@@ -186,9 +208,6 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 #pragma mark -
 #pragma mark Touch Handling
 
-CGPoint lastTouchLocation;
-BOOL dragging;
-
 - (BOOL)beginTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
 	lastTouchLocation = [touch locationInView:self];
@@ -220,14 +239,17 @@ BOOL dragging;
 {
 	dragging = YES;
 	if ([self handleTouch:touch] && continuous)
-	{
-		//TODO : lets only update this if it has changed
-		
+	{	
 		self.currentSegment = [self currentSegmentForAngle:angle];
-		// fire off delegate message
-		SEL rotaryChooserDidChangeSelectedSegmentSelector = @selector(rotaryChooserDidChangeSelectedSegment:);
-		if (self.delegate && [self.delegate respondsToSelector:rotaryChooserDidChangeSelectedSegmentSelector]) {
-			[self.delegate rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser*)self];
+		
+		if (self.currentSegment != oldSegment)
+		{
+			// fire off delegate message
+			SEL rotaryChooserDidChangeSelectedSegmentSelector = @selector(rotaryChooserDidChangeSelectedSegment:);
+			if (self.delegate && [self.delegate respondsToSelector:rotaryChooserDidChangeSelectedSegmentSelector]) {
+				[self.delegate rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser*)self];
+			}
+			oldSegment = self.currentSegment;
 		}
 	}
 	return YES;
@@ -248,14 +270,6 @@ BOOL dragging;
 	
 	dragging = NO;
 }
-
-- (void)cancelTrackingWithEvent:(UIEvent*)event
-{
-	// May need to do something here at a later time
-}
-
-
-
 
 #pragma mark -
 #pragma mark Getters/Setters

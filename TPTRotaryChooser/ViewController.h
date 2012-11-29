@@ -11,11 +11,11 @@
 
 @interface ViewController : UIViewController <TPTRotaryChooserDelegate>
 
-@property TPTRotaryChooser *rotaryChooser;
-
-@property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+@property TPTRotaryChooser *colorRotaryChooser;
+@property TPTRotaryChooser *bgRotaryChooser;
 
 @property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
 @property (weak, nonatomic) IBOutlet UILabel *authorLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *bgImageView;
 
 @end

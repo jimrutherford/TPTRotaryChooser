@@ -21,11 +21,10 @@
 @end
 
 @interface TPTRotaryChooser : UIControl {
-	UIImageView* backgroundImageView;  ///< shows the background image
-	UIImageView* foregroundImageView;  ///< shows the foreground image
-	UIImageView* knobImageView;        ///< shows the knob image
-	float angle;                       ///< for tracking touches
-	CGPoint touchOrigin;               ///< for horizontal/vertical tracking
+	UIImageView* backgroundImageView;  
+	UIImageView* foregroundImageView;  
+	UIImageView* knobImageView;        
+	float angle;                       
 }
 
 @property (nonatomic, weak) id <TPTRotaryChooserDelegate> delegate;
