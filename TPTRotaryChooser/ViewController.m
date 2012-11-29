@@ -17,27 +17,53 @@
 
 @synthesize rotaryChooser;
 @synthesize valueLabel;
+@synthesize quoteLabel;
+@synthesize authorLabel;
+
+NSArray *colors;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	
-	rotaryChooser = [[TPTRotaryChooser alloc] initWithFrame:CGRectMake(200, 200, 400, 400)];
+	
+	
+	colors = @[[UIColor colorWithRed:1.00f green:0.00f blue:0.00f alpha:1.00f],
+			  [UIColor colorWithRed:0.28f green:0.47f blue:1.00f alpha:1.00f],
+			  [UIColor colorWithRed:1.00f green:0.78f blue:0.00f alpha:1.00f],
+			  [UIColor colorWithRed:0.73f green:0.00f blue:0.74f alpha:1.00f],
+			  [UIColor colorWithRed:0.03f green:0.73f blue:0.00f alpha:1.00f],
+			  [UIColor colorWithRed:0.93f green:0.94f blue:0.94f alpha:1.00f]
+			  ];
+	
+	
+	rotaryChooser = [[TPTRotaryChooser alloc] initWithFrame:CGRectMake(20, 20, 250, 250)];
 	rotaryChooser.backgroundColor = [UIColor clearColor];
 	rotaryChooser.numberOfSegments = 6;
 	rotaryChooser.selectedSegment = 1;
+	rotaryChooser.delegate = self;
 	rotaryChooser.backgroundImage = [UIImage imageNamed:@"background"];
 	rotaryChooser.knobImage = [UIImage imageNamed:@"dial"];
-	[rotaryChooser addTarget:self action:@selector(rotaryKnobDidChange) forControlEvents:UIControlEventValueChanged];
 	
+	self.quoteLabel.textColor = [colors objectAtIndex:rotaryChooser.selectedSegment];
+		
 	[self.view addSubview:rotaryChooser];
 	
 }
 
-- (IBAction)rotaryKnobDidChange
+
+- (void)rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser *)chooser
 {
-	valueLabel.text = [NSString stringWithFormat:@"Angle - %i", rotaryChooser.currentSegment];
+	NSLog(@"changing");
 }
+
+- (void)rotaryChooserDidSelectedSegment:(TPTRotaryChooser *)chooser
+{
+	NSLog(@"selected");
+	self.quoteLabel.textColor = [colors objectAtIndex:rotaryChooser.selectedSegment];
+
+}
+
 
 - (void)didReceiveMemoryWarning
 {

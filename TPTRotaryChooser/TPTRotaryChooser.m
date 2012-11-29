@@ -41,11 +41,13 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 {
 	// (If you want to do custom drawing, then this is the place to do so.)
 		
-	if (newAngle > 180)
+	if (dragging)
 	{
-		newAngle = (360-newAngle) * -1;
+		if (newAngle > 180)
+		{
+			newAngle = (360-newAngle) * -1;
+		}
 	}
-	
 	if (animated)
 	{
 		// We cannot simply use UIView's animations because they will take the
@@ -53,12 +55,14 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 		// set up a keyframe animation with three keyframes: the old angle, the
 		// midpoint between the old and new angles, and the new angle.
 		
+		float midpoint = (newAngle + oldAngle)/2.0f;
+
 		CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
 		animation.duration = 0.2f;
 		
 		animation.values = [NSArray arrayWithObjects:
 							[NSNumber numberWithFloat:oldAngle * M_PI/180.0f],
-							[NSNumber numberWithFloat:(newAngle + oldAngle)/2.0f * M_PI/180.0f],
+					[NSNumber numberWithFloat:midpoint * M_PI/180.0f],
 							[NSNumber numberWithFloat:newAngle * M_PI/180.0f],
 							nil];
 		
@@ -111,11 +115,9 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 - (void) setSelectedSegment:(int)newSelectedSegment
 {
 	int oldSelectedSegment = selectedSegment;
-	
-	
-	NSLog(@"Old %i, New %i", oldSelectedSegment, newSelectedSegment);
-	
-	
+
+	//NSLog(@"Old %i, New %i", oldSelectedSegment, newSelectedSegment);
+
 	CGFloat newAngle = [self angleForSegment:newSelectedSegment];
 	
 	if(selectedSegment == -1)
@@ -125,7 +127,6 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	}
 	else
 	{
-		
 		if (!dragging)
 		{
 			CGFloat oldAngle = [self angleForSegment:oldSelectedSegment];
@@ -208,11 +209,7 @@ BOOL dragging;
 	
 	if (dragging)
 	{
-
-	
-	
-		[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:NO];
-		
+		[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:NO];		
 	}
 	angle = newAngle;
 	
@@ -224,8 +221,14 @@ BOOL dragging;
 	dragging = YES;
 	if ([self handleTouch:touch] && continuous)
 	{
-		[self sendActionsForControlEvents:UIControlEventValueChanged];
+		//TODO : lets only update this if it has changed
+		
 		self.currentSegment = [self currentSegmentForAngle:angle];
+		// fire off delegate message
+		SEL rotaryChooserDidChangeSelectedSegmentSelector = @selector(rotaryChooserDidChangeSelectedSegment:);
+		if (self.delegate && [self.delegate respondsToSelector:rotaryChooserDidChangeSelectedSegmentSelector]) {
+			[self.delegate rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser*)self];
+		}
 	}
 	return YES;
 }
@@ -233,10 +236,15 @@ BOOL dragging;
 - (void)endTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
 	[self handleTouch:touch];
-	[self sendActionsForControlEvents:UIControlEventValueChanged];
-	
+		
 	self.currentSegment = [self currentSegmentForAngle:angle];
 	self.selectedSegment = self.currentSegment;
+	
+	// fire off delegate message
+	SEL rotaryChooserDidSelectedSegmentSelector = @selector(rotaryChooserDidSelectedSegment:);
+	if (self.delegate && [self.delegate respondsToSelector:rotaryChooserDidSelectedSegmentSelector]) {
+		[self.delegate rotaryChooserDidSelectedSegment:(TPTRotaryChooser*)self];
+	}
 	
 	dragging = NO;
 }
@@ -260,7 +268,8 @@ BOOL dragging;
 {
 	if (backgroundImageView == nil)
 	{
-		backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+		backgroundImageView = [[UIImageView alloc] init];
+		backgroundImageView.frame = CGRectMake((self.bounds.size.width - image.size.width)/2, (self.bounds.size.height - image.size.height)/2, image.size.width, image.size.height);
 		[self addSubview:backgroundImageView];
 		[self sendSubviewToBack:backgroundImageView];
 	}

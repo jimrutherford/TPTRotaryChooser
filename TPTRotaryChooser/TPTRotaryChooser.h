@@ -8,6 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class TPTRotaryChooser;
+
+@protocol TPTRotaryChooserDelegate <NSObject>
+
+- (void)rotaryChooserDidSelectedSegment:(TPTRotaryChooser *)chooser;
+
+@optional
+- (void)rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser *)chooser;
+
+
+@end
+
 @interface TPTRotaryChooser : UIControl {
 	UIImageView* backgroundImageView;  ///< shows the background image
 	UIImageView* foregroundImageView;  ///< shows the foreground image
@@ -15,6 +27,8 @@
 	float angle;                       ///< for tracking touches
 	CGPoint touchOrigin;               ///< for horizontal/vertical tracking
 }
+
+@property (nonatomic, weak) id <TPTRotaryChooserDelegate> delegate;
 
 /*! The number of segments in the outer band */
 @property (nonatomic) int numberOfSegments;

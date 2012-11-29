@@ -9,9 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "TPTRotaryChooser.h"
 
-@interface ViewController : UIViewController
+@interface ViewController : UIViewController <TPTRotaryChooserDelegate>
 
 @property TPTRotaryChooser *rotaryChooser;
+
 @property (weak, nonatomic) IBOutlet UILabel *valueLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *quoteLabel;
+@property (weak, nonatomic) IBOutlet UILabel *authorLabel;
 
 @end
