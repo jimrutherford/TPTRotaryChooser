@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3730E28E1667C94E00429450 /* dial@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E28C1667C94E00429450 /* dial@2x.png */; };
+		3730E2AB1667DCBB00429450 /* colorDialBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2A91667DCBB00429450 /* colorDialBackground@2x.png */; };
+		3730E2AC1667DCBB00429450 /* textureDialBackground@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2AA1667DCBB00429450 /* textureDialBackground@2x.png */; };
+		3730E2B31667DCE300429450 /* fabric@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2AD1667DCE300429450 /* fabric@2x.png */; };
+		3730E2B41667DCE300429450 /* grate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2AE1667DCE300429450 /* grate@2x.png */; };
+		3730E2B51667DCE300429450 /* leather@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2AF1667DCE300429450 /* leather@2x.png */; };
+		3730E2B61667DCE300429450 /* pattern@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2B01667DCE300429450 /* pattern@2x.png */; };
+		3730E2B71667DCE300429450 /* quilt@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2B11667DCE300429450 /* quilt@2x.png */; };
+		3730E2B81667DCE300429450 /* wood@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3730E2B21667DCE300429450 /* wood@2x.png */; };
 		37D357021663D413008B01D6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357011663D413008B01D6 /* UIKit.framework */; };
 		37D357041663D413008B01D6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357031663D413008B01D6 /* Foundation.framework */; };
 		37D357061663D413008B01D6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357051663D413008B01D6 /* CoreGraphics.framework */; };
@@ -20,12 +29,20 @@
 		37D3571E1663D413008B01D6 /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 37D3571C1663D413008B01D6 /* ViewController.xib */; };
 		37D357291663D45C008B01D6 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D357281663D45C008B01D6 /* QuartzCore.framework */; };
 		37D3572C1663D958008B01D6 /* TPTRotaryChooser.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D3572B1663D958008B01D6 /* TPTRotaryChooser.m */; };
-		37D357371663FC38008B01D6 /* background.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357351663FC38008B01D6 /* background.png */; };
-		37D357381663FC38008B01D6 /* dial.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D357361663FC38008B01D6 /* dial.png */; };
-		37D3573A16640D55008B01D6 /* appBG.png in Resources */ = {isa = PBXBuildFile; fileRef = 37D3573916640D55008B01D6 /* appBG.png */; };
+		37FDDB211667F863007FA669 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 37FDDB201667F863007FA669 /* Icon-72.png */; };
+		37FDDB241667F86D007FA669 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 37FDDB231667F86D007FA669 /* Icon-72@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3730E28C1667C94E00429450 /* dial@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "dial@2x.png"; path = "Images/dial@2x.png"; sourceTree = "<group>"; };
+		3730E2A91667DCBB00429450 /* colorDialBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "colorDialBackground@2x.png"; path = "Images/colorDialBackground@2x.png"; sourceTree = "<group>"; };
+		3730E2AA1667DCBB00429450 /* textureDialBackground@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "textureDialBackground@2x.png"; path = "Images/textureDialBackground@2x.png"; sourceTree = "<group>"; };
+		3730E2AD1667DCE300429450 /* fabric@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "fabric@2x.png"; path = "Images/fabric@2x.png"; sourceTree = "<group>"; };
+		3730E2AE1667DCE300429450 /* grate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "grate@2x.png"; path = "Images/grate@2x.png"; sourceTree = "<group>"; };
+		3730E2AF1667DCE300429450 /* leather@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "leather@2x.png"; path = "Images/leather@2x.png"; sourceTree = "<group>"; };
+		3730E2B01667DCE300429450 /* pattern@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "pattern@2x.png"; path = "Images/pattern@2x.png"; sourceTree = "<group>"; };
+		3730E2B11667DCE300429450 /* quilt@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "quilt@2x.png"; path = "Images/quilt@2x.png"; sourceTree = "<group>"; };
+		3730E2B21667DCE300429450 /* wood@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "wood@2x.png"; path = "Images/wood@2x.png"; sourceTree = "<group>"; };
 		37D356FD1663D413008B01D6 /* TPTRotaryChooser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TPTRotaryChooser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D357011663D413008B01D6 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		37D357031663D413008B01D6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -45,9 +62,8 @@
 		37D357281663D45C008B01D6 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		37D3572A1663D958008B01D6 /* TPTRotaryChooser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPTRotaryChooser.h; sourceTree = "<group>"; };
 		37D3572B1663D958008B01D6 /* TPTRotaryChooser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPTRotaryChooser.m; sourceTree = "<group>"; };
-		37D357351663FC38008B01D6 /* background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = background.png; path = Images/background.png; sourceTree = "<group>"; };
-		37D357361663FC38008B01D6 /* dial.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dial.png; path = Images/dial.png; sourceTree = "<group>"; };
-		37D3573916640D55008B01D6 /* appBG.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = appBG.png; path = Images/appBG.png; sourceTree = "<group>"; };
+		37FDDB201667F863007FA669 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		37FDDB231667F86D007FA669 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +81,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3730E2901667D1D900429450 /* backgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				3730E2AD1667DCE300429450 /* fabric@2x.png */,
+				3730E2AE1667DCE300429450 /* grate@2x.png */,
+				3730E2AF1667DCE300429450 /* leather@2x.png */,
+				3730E2B01667DCE300429450 /* pattern@2x.png */,
+				3730E2B11667DCE300429450 /* quilt@2x.png */,
+				3730E2B21667DCE300429450 /* wood@2x.png */,
+			);
+			name = backgrounds;
+			sourceTree = "<group>";
+		};
 		37D356F21663D413008B01D6 = {
 			isa = PBXGroup;
 			children = (
+				37FDDB231667F86D007FA669 /* Icon-72@2x.png */,
+				37FDDB201667F863007FA669 /* Icon-72.png */,
 				37D357071663D413008B01D6 /* TPTRotaryChooser */,
 				37D357001663D413008B01D6 /* Frameworks */,
 				37D356FE1663D413008B01D6 /* Products */,
@@ -142,9 +173,10 @@
 		37D357261663D435008B01D6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				37D3573916640D55008B01D6 /* appBG.png */,
-				37D357351663FC38008B01D6 /* background.png */,
-				37D357361663FC38008B01D6 /* dial.png */,
+				3730E2901667D1D900429450 /* backgrounds */,
+				3730E2A91667DCBB00429450 /* colorDialBackground@2x.png */,
+				3730E2AA1667DCBB00429450 /* textureDialBackground@2x.png */,
+				3730E28C1667C94E00429450 /* dial@2x.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -213,9 +245,17 @@
 				37D357161663D413008B01D6 /* Default@2x.png in Resources */,
 				37D357181663D413008B01D6 /* Default-568h@2x.png in Resources */,
 				37D3571E1663D413008B01D6 /* ViewController.xib in Resources */,
-				37D357371663FC38008B01D6 /* background.png in Resources */,
-				37D357381663FC38008B01D6 /* dial.png in Resources */,
-				37D3573A16640D55008B01D6 /* appBG.png in Resources */,
+				3730E28E1667C94E00429450 /* dial@2x.png in Resources */,
+				3730E2AB1667DCBB00429450 /* colorDialBackground@2x.png in Resources */,
+				3730E2AC1667DCBB00429450 /* textureDialBackground@2x.png in Resources */,
+				3730E2B31667DCE300429450 /* fabric@2x.png in Resources */,
+				3730E2B41667DCE300429450 /* grate@2x.png in Resources */,
+				3730E2B51667DCE300429450 /* leather@2x.png in Resources */,
+				3730E2B61667DCE300429450 /* pattern@2x.png in Resources */,
+				3730E2B71667DCE300429450 /* quilt@2x.png in Resources */,
+				3730E2B81667DCE300429450 /* wood@2x.png in Resources */,
+				37FDDB211667F863007FA669 /* Icon-72.png in Resources */,
+				37FDDB241667F86D007FA669 /* Icon-72@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +387,7 @@
 				37D357231663D413008B01D6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
