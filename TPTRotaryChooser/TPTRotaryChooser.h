@@ -8,13 +8,35 @@
 
 #import <UIKit/UIKit.h>
 
+@class TPTRotaryChooser;
+
+@protocol TPTRotaryChooserDelegate <NSObject>
+
+- (void)rotaryChooserDidSelectedSegment:(TPTRotaryChooser *)chooser;
+
+@optional
+- (void)rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser *)chooser;
+
+
+@end
+
 @interface TPTRotaryChooser : UIControl {
-	UIImageView* backgroundImageView;  ///< shows the background image
-	UIImageView* foregroundImageView;  ///< shows the foreground image
-	UIImageView* knobImageView;        ///< shows the knob image
-	float angle;                       ///< for tracking touches
-	CGPoint touchOrigin;               ///< for horizontal/vertical tracking
+	UIImageView* backgroundImageView;  
+	UIImageView* foregroundImageView;  
+	UIImageView* knobImageView;        
+	float angle;                       
 }
+
+@property (nonatomic, weak) id <TPTRotaryChooserDelegate> delegate;
+
+/*! The number of segments in the outer band */
+@property (nonatomic) int numberOfSegments;
+
+/*! The selected segment */
+@property (nonatomic) int selectedSegment;
+
+/*! The current segment - this property updates while the control is dragging */
+@property (nonatomic) int currentSegment;
 
 
 /*! The image that is drawn behind the knob. May be nil. */

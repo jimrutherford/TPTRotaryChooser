@@ -14,7 +14,14 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 @implementation TPTRotaryChooser
 
 @synthesize continuous;
+@synthesize numberOfSegments;
+@synthesize selectedSegment;
+@synthesize currentSegment;
 
+
+CGPoint lastTouchLocation;
+BOOL dragging;
+int oldSegment;
 
 - (float)angleBetweenCenterAndPoint:(CGPoint)point
 {
@@ -38,20 +45,46 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 - (void)angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:(BOOL)animated
 {
 	// (If you want to do custom drawing, then this is the place to do so.)
-	
+		
+	if (dragging)
+	{
+		if (newAngle > 180)
+		{
+			newAngle = (360-newAngle) * -1;
+		}
+	}
 	if (animated)
 	{
-		// We cannot simply use UIView's animations because they will take the
-		// shortest path, but we always want to go the long way around. So we
-		// set up a keyframe animation with three keyframes: the old angle, the
-		// midpoint between the old and new angles, and the new angle.
+		// We are going to animate between three keyframes in order to
+		// make sure we are animating between the shortest points
+		// start by getting a point in the middle of our start and end
+		float midpoint = (newAngle + oldAngle)/2.0f;
+
 		
+		// if we are animating between taps let's get the shortest
+		// distance to animate between
+		if (!dragging) {
+			float diff = fabsf(newAngle - oldAngle);
+			if (diff > 180)
+			{
+				midpoint = midpoint - 180;
+				if (newAngle>oldAngle)
+				{
+					newAngle = (360-newAngle) * -1;
+				}
+				else
+				{
+					oldAngle = (360-oldAngle) * -1;
+				}
+				}
+		}
+			
 		CAKeyframeAnimation* animation = [CAKeyframeAnimation animationWithKeyPath:@"transform.rotation.z"];
 		animation.duration = 0.2f;
 		
 		animation.values = [NSArray arrayWithObjects:
 							[NSNumber numberWithFloat:oldAngle * M_PI/180.0f],
-							[NSNumber numberWithFloat:(newAngle + oldAngle)/2.0f * M_PI/180.0f],
+					[NSNumber numberWithFloat:midpoint * M_PI/180.0f],
 							[NSNumber numberWithFloat:newAngle * M_PI/180.0f],
 							nil];
 		
@@ -79,8 +112,16 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	
 	knobImageView = [[UIImageView alloc] initWithFrame:self.bounds];
 	[self addSubview:knobImageView];
-	
-	//[self angleDidChangeFrom:angle to:angle animated:NO];
+}
+
+-(id) init
+{
+	if (self = [super init])  {
+		// init some properties to sentinal values
+		oldSegment = -1;
+		self.selectedSegment = -1;
+	}
+	return self;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -92,77 +133,143 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 	return self;
 }
 
-- (id)initWithCoder:(NSCoder*)aDecoder
+#pragma mark -
+#pragma mark Selected Item Handling
+
+- (void) setSelectedSegment:(int)newSelectedSegment
 {
-	if ((self = [super initWithCoder:aDecoder]))
+	int oldSelectedSegment = selectedSegment;
+
+	CGFloat newAngle = [self angleForSegment:newSelectedSegment];
+	
+	if(selectedSegment == -1)
 	{
-		[self commonInit];
+		// control is being drawn for the first time, no need to animate
+		[self angleDidChangeFrom:(float)0.0f to:(float)newAngle animated:NO];
 	}
-	return self;
+	else
+	{
+		if (!dragging)
+		{
+			CGFloat oldAngle = [self angleForSegment:oldSelectedSegment];
+			[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:YES];
+		}
+		else
+		{
+			[self angleDidChangeFrom:(float)angle to:(float)newAngle animated:YES];
+		}
+	}
+
+	selectedSegment = newSelectedSegment;
 }
 
-- (void)dealloc
+
+
+-(CGFloat) angleForSegment:(int)segment
 {
-
+	float segments = [[NSNumber numberWithInt: numberOfSegments] floatValue];
+	float anglePerSegment = 360.0f/segments;
+	
+	// adding one as our selected segment is zero based
+	return (segment * anglePerSegment) + (anglePerSegment/2);
+	
 }
+
+- (int) currentSegmentForAngle:(float)theAngle
+{
+	int segment = 0;
+
+	// get the angle as a range between 0 and 360
+	float actualAngle = theAngle;
+	
+	if (angle < 0)
+	{
+		actualAngle = 360.0f + theAngle;
+	}
+	
+	// translate the angle into slice
+	float totalSegments = [[NSNumber numberWithInt: numberOfSegments] floatValue];
+	float anglePerSegment = 360.0f/totalSegments;
+	
+	for (float a = 0; a < totalSegments; a++) {
+		float currentAngle = a * anglePerSegment;
+		float nextAngle = (a + 1) *anglePerSegment;
+		
+		if (actualAngle > currentAngle && actualAngle < nextAngle)
+		{
+			segment = [[NSNumber numberWithFloat:a] intValue];
+			break;
+		}
+	}
+	return segment;
+}
+
 
 #pragma mark -
 #pragma mark Touch Handling
 
 - (BOOL)beginTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
-	CGPoint point = [touch locationInView:self];
-	
-
-	// If the touch is too close to the center, we can't calculate a decent
-	// angle and the knob becomes too jumpy.
-	if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
-		return NO;
-	
-	// Calculate starting angle between touch and center of control.
-	angle = [self angleBetweenCenterAndPoint:point];
+	lastTouchLocation = [touch locationInView:self];
+	dragging = NO;
 	
 	return YES;
 }
 
 - (BOOL)handleTouch:(UITouch*)touch
 {
-	
 	CGPoint point = [touch locationInView:self];
 	
 	if ([self squaredDistanceToCenter:point] < MIN_DISTANCE_SQUARED)
 		return NO;
-	
 	// Calculate how much the angle has changed since the last event.
 	float oldAngle = angle;
 	float newAngle = [self angleBetweenCenterAndPoint:point];
 	
-	[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:YES];
-
+	if (dragging)
+	{
+		[self angleDidChangeFrom:(float)oldAngle to:(float)newAngle animated:NO];		
+	}
 	angle = newAngle;
-	NSLog(@"Angle is %f", angle);
+	
 	return YES;
 }
 
 - (BOOL)continueTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
+	dragging = YES;
 	if ([self handleTouch:touch] && continuous)
-		[self sendActionsForControlEvents:UIControlEventValueChanged];
-	
+	{	
+		self.currentSegment = [self currentSegmentForAngle:angle];
+		
+		if (self.currentSegment != oldSegment)
+		{
+			// fire off delegate message
+			SEL rotaryChooserDidChangeSelectedSegmentSelector = @selector(rotaryChooserDidChangeSelectedSegment:);
+			if (self.delegate && [self.delegate respondsToSelector:rotaryChooserDidChangeSelectedSegmentSelector]) {
+				[self.delegate rotaryChooserDidChangeSelectedSegment:(TPTRotaryChooser*)self];
+			}
+			oldSegment = self.currentSegment;
+		}
+	}
 	return YES;
 }
 
 - (void)endTrackingWithTouch:(UITouch*)touch withEvent:(UIEvent*)event
 {
 	[self handleTouch:touch];
-	[self sendActionsForControlEvents:UIControlEventValueChanged];
+		
+	self.currentSegment = [self currentSegmentForAngle:angle];
+	self.selectedSegment = self.currentSegment;
+	
+	// fire off delegate message
+	SEL rotaryChooserDidSelectedSegmentSelector = @selector(rotaryChooserDidSelectedSegment:);
+	if (self.delegate && [self.delegate respondsToSelector:rotaryChooserDidSelectedSegmentSelector]) {
+		[self.delegate rotaryChooserDidSelectedSegment:(TPTRotaryChooser*)self];
+	}
+	
+	dragging = NO;
 }
-
-- (void)cancelTrackingWithEvent:(UIEvent*)event
-{
-	// May need to do something here at a later time
-}
-
 
 #pragma mark -
 #pragma mark Getters/Setters
@@ -175,7 +282,8 @@ const float MIN_DISTANCE_SQUARED = 16.0f;
 {
 	if (backgroundImageView == nil)
 	{
-		backgroundImageView = [[UIImageView alloc] initWithFrame:self.bounds];
+		backgroundImageView = [[UIImageView alloc] init];
+		backgroundImageView.frame = CGRectMake((self.bounds.size.width - image.size.width)/2, (self.bounds.size.height - image.size.height)/2, image.size.width, image.size.height);
 		[self addSubview:backgroundImageView];
 		[self sendSubviewToBack:backgroundImageView];
 	}
